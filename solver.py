@@ -71,12 +71,51 @@ class PrimeClimb:
             pass
         return best_move
 
-def main():
-    game = PrimeClimb()
-    for tile in range(102):
-        score = game.evaluate_tile(tile)
-        if score > 0:
-            print(f"Score for tile {tile}: {score}")
+import numpy as np
+import random
 
-if __name__ == "__main__":
-    main()
+def play_random_game():
+    game = PrimeClimb()
+    turns = 0
+    while game.pawns[0] != 101 and game.pawns[1] != 101:
+        die1, die2 = game.roll_dice()
+        dice_to_use = [die1, die2]
+        random.shuffle(dice_to_use)  
+
+        for _ in range(2):
+            die_to_use = dice_to_use.pop()
+            valid_move_made = False
+
+            # Keep trying until a valid move is made with the current die
+            while not valid_move_made:
+                pawn = random.choice([0, 1])  # Select a random pawn
+                operation = random.choice(['+', '-', '*', '/'])
+                move = (operation, die_to_use)
+                try:
+                    game.apply_move(pawn, move)
+                    valid_move_made = True
+                except InvalidMoveError as e:
+                    pass  # Ignore the exception and retry with the same die
+            
+        turns += 1
+
+    # print(f"Game over. It took {turns} turns.")
+    return turns
+
+
+def main():
+    turn_counts = []
+    for _ in range(10000):
+        turn_counts.append(play_random_game())
+
+    mean_turn_count = np.mean(turn_counts)
+    median_turn_count = np.median(turn_counts)
+    min_turn_count = np.min(turn_counts)
+    max_turn_count = np.max(turn_counts)
+
+    print(f"Mean turn count: {mean_turn_count}")
+    print(f"Median turn count: {median_turn_count}")
+    print(f"Min turn count: {min_turn_count}")
+    print(f"Max turn count: {max_turn_count}")
+
+main()
