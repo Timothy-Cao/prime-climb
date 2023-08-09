@@ -87,10 +87,10 @@ class AutoPrimeClimb(PrimeClimb):
                 if temp_pawn[0] == 101 or temp_pawn[1] == 101:
                     return 10000
                 # Priority 2: Multiply a pawn that is under 50 to above 80 but below 101
-                if temp_pawn[selected_pawn_index] < 50 and 80 < temp_pawn[selected_pawn_index] * selected_die < 101:
+                if 80 < temp_pawn[selected_pawn_index] * selected_die < 101:
                     return 5000
-                # Priority 3: Maximize the sum of only the pawns that are above 50 if there are any
-                if temp_pawn[0] > 50 and temp_pawn[1] > 50:
+                # Priority 3: If there are any pawns above 50, prioritize maximizing the sum of the pawns that are above 50
+                if any(x > 50 for x in temp_pawn):
                     return sum(temp_pawn)
                 # Priority 4: Get pawns below 50 to be as near 20 as possible
                 best_evaluation = max(best_evaluation, -abs(temp_pawn[selected_pawn_index] - 20))
@@ -158,7 +158,7 @@ class AutoPrimeClimb(PrimeClimb):
 
 #Tests the behavior in playstyle used by player A.
 def test_strategy(player_positions, dice_rolls):
-    print("Test Strategy")
+    print("")
     game = AutoPrimeClimb()
     game.pawns['A'] = player_positions
 
@@ -192,14 +192,14 @@ def test_strategy(player_positions, dice_rolls):
 
 import random
 
-# if __name__ == "__main__":
-#     for _ in range(100):
-#         player_positions = [random.randint(0, 100), random.randint(0, 100)] # Random player positions
-#         dice_rolls = [random.randint(1, 10), random.randint(1, 10)]          # Random dice rolls
-#         test_strategy(player_positions, dice_rolls)
-
-
 if __name__ == "__main__":
-    game = AutoPrimeClimb()
-    game.play_game()
+    for _ in range(100):
+        player_positions = [random.randint(0, 100), random.randint(0, 100)] # Random player positions
+        dice_rolls = [random.randint(1, 10), random.randint(1, 10)]          # Random dice rolls
+        test_strategy(player_positions, dice_rolls)
+
+
+# if __name__ == "__main__":
+#     game = AutoPrimeClimb()
+#     game.play_game()
     
