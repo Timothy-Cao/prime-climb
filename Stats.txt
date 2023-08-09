@@ -6,3 +6,52 @@ Mean turn count: 187.7701
 Median turn count: 135.0
 Min turn count: 3
 Max turn count: 2028
+
+
+method: greedy
+
+Mean turn count: 8.52
+Median turn count: 8.0
+Min turn count: 2
+Max turn count: 28
+
+
+Score for tile 10: 2
+Score for tile 11: 2
+Score for tile 12: 2
+Score for tile 13: 2
+Score for tile 14: 2
+Score for tile 16: 2
+Score for tile 19: 2
+Score for tile 20: 2
+Score for tile 23: 2
+Score for tile 24: 2
+Score for tile 25: 2
+Score for tile 31: 2
+Score for tile 32: 2
+Score for tile 33: 2
+Score for tile 46: 2
+Score for tile 47: 2
+Score for tile 48: 2
+Score for tile 49: 2
+Score for tile 50: 2
+Score for tile 81: 1
+Score for tile 82: 2
+Score for tile 83: 3
+Score for tile 84: 4
+Score for tile 85: 5
+Score for tile 86: 6
+Score for tile 87: 7
+Score for tile 88: 8
+Score for tile 89: 9
+Score for tile 90: 10
+Score for tile 91: 28
+Score for tile 92: 29
+Score for tile 93: 30
+Score for tile 94: 31
+Score for tile 95: 32
+Score for tile 96: 31
+Score for tile 97: 32
+Score for tile 98: 33
+Score for tile 99: 34
+Score for tile 100: 35

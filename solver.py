@@ -102,11 +102,55 @@ def play_random_game():
     # print(f"Game over. It took {turns} turns.")
     return turns
 
+def greedy_solution():
+    game = PrimeClimb()
+    turns = 0
+    while game.pawns[0] != 101 and game.pawns[1] != 101:
+        die1, die2 = game.roll_dice()
+        best_sum = 0
+        best_moves = []
+        for die_combination in [(die1, die2), (die2, die1)]:
+            for pawn_combination in [(0, 1), (1, 0), (0, 0), (1, 1)]:
+                for op1 in ['+', '-', '*', '/']:
+                    for op2 in ['+', '-', '*', '/']:
+                        saved_pawns = game.pawns.copy()
+                        try:
+                            game.apply_move(pawn_combination[0], (op1, die_combination[0]))
+                            game.apply_move(pawn_combination[1], (op2, die_combination[1]))
+                            current_sum = sum(game.pawns)
+                            if current_sum > best_sum:
+                                best_sum = current_sum
+                                best_moves = [(pawn_combination[0], (op1, die_combination[0])),
+                                              (pawn_combination[1], (op2, die_combination[1]))]
+
+                        except InvalidMoveError as e:
+                            pass
+                        game.pawns = saved_pawns
+        for pawn, move in best_moves:
+            game.apply_move(pawn, move)
+
+        turns += 1
+
+    return turns
+
+def get_scoring():
+    game = PrimeClimb()
+    scoring = {}
+    for tile in range(101): # Including 100, so the range goes up to 101
+        score = game.evaluate_tile(tile)
+        if score > 0:
+            scoring[tile] = score
+            print(f"Score for tile {tile}: {score}")
+    return scoring
+
 
 def main():
+    
+    print(get_scoring)
+    return 1
     turn_counts = []
-    for _ in range(10000):
-        turn_counts.append(play_random_game())
+    for _ in range(1000):
+        turn_counts.append(greedy_solution())
 
     mean_turn_count = np.mean(turn_counts)
     median_turn_count = np.median(turn_counts)
