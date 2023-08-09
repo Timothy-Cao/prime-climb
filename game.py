@@ -46,15 +46,9 @@ class PrimeClimb:
                     pawn[piece_index] = original_position
         return valid_moves
 
-
-
-
     def play_game(self):
 
-        import os
         from random import choice
-
-        os.system('cls' if os.name == 'nt' else 'clear')  # Clear the terminal
 
         while True:
             player = self.player_order[self.current_player_index]
