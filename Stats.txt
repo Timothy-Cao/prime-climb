@@ -1,0 +1,8 @@
+Sample size: 10,000
+
+method: random
+
+Mean turn count: 187.7701
+Median turn count: 135.0
+Min turn count: 3
+Max turn count: 2028
